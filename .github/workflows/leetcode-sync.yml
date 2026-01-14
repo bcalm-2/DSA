@@ -2,8 +2,11 @@ name: Sync LeetCode Solutions
 
 on:
   schedule:
-    - cron: "0 */6 * * *" # every 6 hours
+    - cron: "0 */6 * * *"
   workflow_dispatch:
+
+permissions:
+  contents: write # ✅ allows commit & push
 
 jobs:
   sync:
@@ -16,12 +19,5 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           leetcode-session: ${{ secrets.LEETCODE_SESSION }}
-
-          # ✅ sync ALL existing problems
-          sync-all: true
-
-          # ✅ ONLY accepted submissions
-          accepted-only: true
-
-          # 📁 your custom folder
           destination-folder: problems/leet_code
+          verbose: true
